@@ -3,10 +3,11 @@ Táto téma sa zaoberá analýzou filmových hodnotení a odporúčaní na zákl
 ___
 ## 1. Úvod a popis zdrojových dát
 
-### 1.1 Úvod a popis zdrojových dát
+
 Cieľom semestrálneho projektu je identifikácia najviac hodnotených a najlepšie hodnotených filmov, analýza preferencií užívateľov na základe ich demografie a vytvorenie modelu odporúčania filmov.
 ___
-### 1.2 Popis tabuliek
+
+### Popis tabuliek
 
 **Movies** obsahuje zoznam filmov, pričom každý film má unikátny identifikátor, ktorý sa nazýva "id" a slúži na jednoznačnú identifikáciu filmu. Názov filmu je uložený v stĺpci "title" a rok vydania filmu je zaznamenaný v stĺpci "release_year".
 
@@ -24,8 +25,10 @@ ___
 
 **Age_Group** slúži na kategorizáciu vekových skupín. Každá veková skupina má unikátny identifikátor "id" a jej názov je uvedený v stĺpci "name".
 ___
-### 1.3 ERD diagram
+
+### ERD diagram
 ![Entitno-relačná schéma MovieLens](erd_schema.png)
+
 <p align="center"><i>Obrázok 1 Entitno-relačná schéma MovieLens</i></p>
 
 
