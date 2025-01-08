@@ -74,6 +74,6 @@ ___
 - #### Typ dimenzie: SCD 1, pretože sú údaje nemenné.
 ___
 
-
+![Schéma hviezdy pre MovieLens](star_schema.png)
 <p align="center"><i>Obrázok 2 Schéma hviezdy pre MovieLens</i></p>
 
