@@ -72,4 +72,8 @@ ___
 #### `dim_movies`
 - Obsahuje údaje o filme (názov, rok vydania, žáner).
 - #### Typ dimenzie: SCD 1, pretože sú údaje nemenné.
- 
+___
+
+
+<p align="center"><i>Obrázok 2 Schéma hviezdy pre MovieLens</i></p>
+
