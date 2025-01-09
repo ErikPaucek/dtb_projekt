@@ -229,4 +229,83 @@ ___
 ## 4. Vizualizácia dát
 Na dashboarde sú zobrazené grafy, ktoré poskytujú prehľad o hodnoteniach filmov zameraných na vekové skupiny, žánre, časové obdobia, najviac hodnotené filmy a trendy v priebehu času. Umožňujú analyzovať, ktoré vekové skupiny a žánre sú najaktívnejšie pri hodnotení, a identifikovať, kedy a ktoré filmy získavajú najviac pozornosti. Pomáhajú tak lepšie pochopiť správanie používateľov a identifikovať predajné a hodnotiace trendy, čo je kľúčové pre optimalizáciu marketingových a obchodných stratégií.
 
+<br>
 
+![Screenshot dashboardu pre MovieLens](dashboard.png)
+<p align="center"><i>Obrázok 3 Screenshot dashboardu pre MovieLens</i></p>
+
+<br>
+
+### 1. Graf: Distribúcia hodnotení podľa vekových skupín
+Tento príkaz ukazuje, ktoré vekové skupiny hodnotia filmy najčastejšie. Porovnáva počet hodnotení medzi rôznymi vekovými skupinami.
+
+```sql
+SELECT 
+    du.age_groups AS age_group, 
+    COUNT(fr.fact_rating_id) AS rating_count
+FROM fact_ratings fr
+JOIN dim_users du ON fr.user_id = du.user_id
+GROUP BY du.age_groups
+ORDER BY rating_count DESC;
+```
+<br>
+
+### 2. Graf: Najlepšie hodnotené žánre filmov
+Tento príkaz určuje, ktoré filmové žánre majú najvyššie priemerné hodnotenie. Umožňuje identifikovať, ktoré žánre sú preferované a vysoko hodnotené.
+
+```sql
+SELECT 
+    dm.genres AS genre, 
+    AVG(fr.rating) AS average_rating
+FROM fact_ratings fr
+JOIN dim_movies dm ON fr.movie_id = dm.movie_id
+GROUP BY dm.genres
+ORDER BY average_rating DESC
+LIMIT 10;
+```
+<br>
+
+### 3. Graf: Počet hodnotení podľa časových období (AM/PM)
+Tento príkaz ukazuje, či používatelia častejšie hodnotia filmy dopoludnia (AM) alebo popoludní (PM), čo odhaľuje, kedy je najväčší záujem o hodnotenie.
+
+```sql
+SELECT 
+    dt.am_pm AS time_period, 
+    COUNT(fr.fact_rating_id) AS rating_count
+FROM fact_ratings fr
+JOIN dim_time dt ON fr.time_id = dt.time_id
+GROUP BY dt.am_pm
+ORDER BY rating_count DESC;
+```
+<br>
+
+### 4. Graf: Top 5 najviac hodnotených filmov
+Tento príkaz ukazuje, ktoré filmy dostali najviac hodnotení. Zameriava sa na najpopulárnejšie filmy, ktoré získali najväčší záujem od používateľov.
+
+```sql
+SELECT 
+    dm.title AS movie_title, 
+    COUNT(fr.fact_rating_id) AS total_ratings
+FROM fact_ratings fr
+JOIN dim_movies dm ON fr.movie_id = dm.movie_id
+GROUP BY dm.title
+ORDER BY total_ratings DESC
+LIMIT 5;
+```
+<br>
+
+### 5. Graf: Trendy hodnotení v čase (mesačne)
+Tento príkaz zobrazuje, ako sa počet hodnotení vyvíja počas mesiacov. Umožňuje sledovať sezónne alebo dlhodobé trendy v hodnoteniach filmov.
+
+```sql
+SELECT 
+    dd.month_string AS month, 
+    COUNT(fr.fact_rating_id) AS total_ratings
+FROM fact_ratings fr
+JOIN dim_date dd ON fr.date_id = dd.date_id
+GROUP BY dd.month_string, dd.month
+ORDER BY dd.month ASC;
+```
+___
+
+**Autor:** Erik Pauček
