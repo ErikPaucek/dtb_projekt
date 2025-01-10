@@ -225,8 +225,6 @@ Na dashboarde sú zobrazené grafy, ktoré poskytujú prehľad o hodnoteniach fi
 ![Screenshot dashboardu pre MovieLens](dashboard.png)
 <p align="center"><i>Obrázok 3 Screenshot dashboardu pre MovieLens</i></p>
 
-<br>
-
 ### 1. Graf: Distribúcia hodnotení podľa vekových skupín
 Tento príkaz ukazuje, ktoré vekové skupiny hodnotia filmy najčastejšie. Porovnáva počet hodnotení medzi rôznymi vekovými skupinami.
 
