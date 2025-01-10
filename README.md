@@ -6,8 +6,6 @@ ___
 
 Cieľom semestrálneho projektu je identifikácia najviac hodnotených a najlepšie hodnotených filmov, analýza preferencií užívateľov na základe ich demografie a vytvorenie modelu odporúčania filmov.
 
-<br>
-
 ### Popis tabuliek
 
 `movies` obsahuje zoznam filmov, pričom každý film má unikátny identifikátor, ktorý sa nazýva "id" a slúži na jednoznačnú identifikáciu filmu. Názov filmu je uložený v stĺpci "title" a rok vydania filmu je zaznamenaný v stĺpci "release_year".
@@ -25,8 +23,6 @@ Cieľom semestrálneho projektu je identifikácia najviac hodnotených a najlep�
 `occupations` obsahuje zoznam zamestnaní. Každé zamestnanie má unikátny identifikátor "id" a jeho názov je zaznamenaný v stĺpci "name".
 
 `age_group` slúži na kategorizáciu vekových skupín. Každá veková skupina má unikátny identifikátor "id" a jej názov je uvedený v stĺpci "name".
-
-<br>
 
 ### ERD diagram
 ![Entitno-relačná schéma MovieLens](erd_schema.png)
@@ -46,8 +42,6 @@ ___
 - **tags_id** - Cudzí klúč, ktorý odkazuje na tabuľku `dim_tags`.
 - **time_id** - Cudzí klúč, ktorý odkazuje na tabuľku `dim_time`.
 - **movie_id** - Cudzí klúč, ktorý odkazuje na tabuľku `dim_movies`.
-
-<br>
 
 ### Dimenzionálne tabuľky:
 
@@ -99,7 +93,6 @@ COPY INTO users_staging
 FROM @my_stage/users.csv
 FILE_FORMAT = (TYPE = 'CSV' FIELD_OPTIONALLY_ENCLOSED_BY = '"' SKIP_HEADER = 1);
 ```
-<br>
 
 ### Transform (Transformácia dát)
 V tejto fáze boli dáta zo staging tabuliek upravené, vyčistené a obohatené s cieľom pripraviť dimenzie a faktovú tabuľku, ktoré umožnia efektívnu analýzu. 
@@ -208,8 +201,6 @@ LEFT JOIN tags_staging t
 ```
 **Účel:** Tento príkaz vytvára faktovú tabuľku `fact_ratings`, ktorá obsahuje hodnotenia filmov používateľmi, spojené s príslušnými dátumami, časmi a tagmi. Používa sa pripojenie (LEFT JOIN) na získanie tagov spojených s hodnoteniami.
 
-<br>
-
 ### Load (Načítanie dát)
 Po úspešnom vytvorení dimenzií a faktovej tabuľky boli dáta presunuté do finálnej štruktúry. Na záver boli staging tabuľky vymazané s cieľom optimalizovať využitie úložného priestoru.
 
@@ -248,7 +239,6 @@ JOIN dim_users du ON fr.user_id = du.user_id
 GROUP BY du.age_groups
 ORDER BY rating_count DESC;
 ```
-<br>
 
 ### 2. Graf: Najlepšie hodnotené žánre filmov
 Tento príkaz určuje, ktoré filmové žánre majú najvyššie priemerné hodnotenie. Umožňuje identifikovať, ktoré žánre sú preferované a vysoko hodnotené.
@@ -263,7 +253,6 @@ GROUP BY dm.genres
 ORDER BY average_rating DESC
 LIMIT 10;
 ```
-<br>
 
 ### 3. Graf: Počet hodnotení podľa časových období (AM/PM)
 Tento príkaz ukazuje, či používatelia častejšie hodnotia filmy dopoludnia (AM) alebo popoludní (PM), čo odhaľuje, kedy je najväčší záujem o hodnotenie.
@@ -277,7 +266,6 @@ JOIN dim_time dt ON fr.time_id = dt.time_id
 GROUP BY dt.am_pm
 ORDER BY rating_count DESC;
 ```
-<br>
 
 ### 4. Graf: Top 5 najviac hodnotených filmov
 Tento príkaz ukazuje, ktoré filmy dostali najviac hodnotení. Zameriava sa na najpopulárnejšie filmy, ktoré získali najväčší záujem od používateľov.
@@ -292,7 +280,6 @@ GROUP BY dm.title
 ORDER BY total_ratings DESC
 LIMIT 5;
 ```
-<br>
 
 ### 5. Graf: Trendy hodnotení v čase (mesačne)
 Tento príkaz zobrazuje, ako sa počet hodnotení vyvíja počas mesiacov. Umožňuje sledovať sezónne alebo dlhodobé trendy v hodnoteniach filmov.
